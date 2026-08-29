@@ -1,14 +1,62 @@
-.weather-block {
-  background-color: rgb(241, 244, 196);
+.button-block {
+  background-color: rgb(255, 234, 0);
   width: 200px;
   height: 150px;
   border: 2px solid grey;
   border-radius: 5px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
-.weather-title {
+.title {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
 }
 
+.btn {
+  height: 35px;
+  width: 100px;
+  font-size: large;
+  color:rgb(254, 254, 254);
+  background-color: black;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 5px;
+}
+
+.btn-user-names {
+  cursor: pointer;
+}
+
+.btn-user-names:active {
+  background-color: rgb(36, 36, 36);
+}
+
+.non-display {
+display: none;
+}
+
+.users-window {
+
+height: 300px;
+width: 200px;
+background-color: rgb(255, 234, 0);
+
+border: 2px solid grey;
+border-radius: 5px;
+}
+
+.btn-container {
+  display:grid;
+  justify-content: center;
+}
+
+.btn-user-show-noneActive {
+  background-color: darkgrey;
+  color: grey;
+}
+.btn-user-show-Active {
+  background-color: rgb(2, 250, 2);
+  color:black;
+  cursor: pointer;
+}
