@@ -1,6 +1,10 @@
 import './App.css'
+import { useState } from 'react'
 
 function App() {
+
+const [isDisabled, setIsDisabled] = useState(true)
+const [resp, setResp] = useState([])
 
 let responseArr = []
 async function getUsers() {
@@ -10,11 +14,14 @@ async function getUsers() {
     if (!response.ok) {
       throw new Error(`Код ошибки ${response.status}`)
     }
+    setIsDisabled(false)
     const result = await response.json()
     console.log('my result: ', result)
     document.getElementById('users-show-btn').classList.add('btn-user-show-Active')
-    responseArr = result
+    setResp(result)
+    console.log('что записалось в respArr', responseArr)
     
+  
   }
  catch(error) {
   console.log("Не удалось получить данные", error)
@@ -22,15 +29,19 @@ async function getUsers() {
 }
 
 function showUsers() {
+  console.log('SU', resp)
   const usersWindow = document.querySelector('.users-window')
   const usersList = document.createElement('ol')
   usersWindow.append(usersList)
   usersWindow.classList.remove('non-display')
-for (let i = 0; i < responseArr.length; i++) {
+  console.log('respArr', resp)
+  
+for (let i = 0; i < resp.length; i++) {
   const listItem = document.createElement('li')
   usersList.append(listItem)
-  listItem.textContent = responseArr[i].name
+  listItem.textContent = resp[i].name
 }
+setIsDisabled(true)
 }
 
 
@@ -40,8 +51,8 @@ return (
   <div className='button-block'>
     <h1 className='title'>Информация о пользователях</h1>
     <div className='btn-container'>
-      <button className='btn btn-user-names' onClick={getUsers}>Запросить пользователей</button>
-      <button className='btn btn-user-show-noneActive' id='users-show-btn' onClick={showUsers}>Показать пользователей</button>
+      <button className='btn btn-user-names' onClick={getUsers}>Запросить пользователей у сервера</button>
+      <button className='btn btn-user-show-noneActive' id='users-show-btn' onClick={showUsers} disabled = {isDisabled}>Показать пользователей</button>
     </div>
   </div>
     <div className='users-window non-display'>
@@ -49,6 +60,7 @@ return (
     </div>
     </div>
 )
+ 
 }
 
 export default App

@@ -16,7 +16,7 @@
 .btn {
   height: 35px;
   width: 100px;
-  font-size: large;
+  font-size: 1.1em;
   color:rgb(254, 254, 254);
   background-color: black;
   border-radius: 5px;
@@ -38,7 +38,7 @@ display: none;
 
 .users-window {
 
-height: 300px;
+height: auto;
 width: 200px;
 background-color: rgb(255, 234, 0);
 
