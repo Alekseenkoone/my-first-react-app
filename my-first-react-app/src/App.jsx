@@ -1,66 +1,48 @@
-import './App.css'
-import { useState } from 'react'
+import "./App.css";
+
+import Block from "./components/block";
 
 function App() {
 
-const [isDisabled, setIsDisabled] = useState(true)
-const [resp, setResp] = useState([])
+  let commentsData = []
 
-let responseArr = []
-async function getUsers() {
-  try {
-    const response = 
-    await fetch('https://jsonplaceholder.typicode.com/users')
-    if (!response.ok) {
-      throw new Error(`Код ошибки ${response.status}`)
+  const testRequest = () => {
+  fetch('https://jsonplaceholder.typicode.com/comments')
+  .then(response =>{
+    if(!response.ok) {
+      throw new Error('Error ', response.status)
     }
-    setIsDisabled(false)
-    const result = await response.json()
-    console.log('my result: ', result)
-    document.getElementById('users-show-btn').classList.add('btn-user-show-Active')
-    setResp(result)
-    console.log('что записалось в respArr', responseArr)
+    return response.json()
+  }).then(data => {
+    console.log('Данные получены', data)
+    commentsData = data
+  }).catch (error => console.error('Призошла ошибка', error)
+  )
+}
+
+  const showComments = () => {
+    const commentsList = document.querySelector('.comments-list')
     
-  
+    
+    for (let i = 0; i < commentsData.length; i++) {
+      const commentsListItem = document.createElement('li')
+      commentsList.append(commentsListItem)
+      commentsListItem.textContent = commentsData[i].name
+    }
   }
- catch(error) {
-  console.log("Не удалось получить данные", error)
-}
-}
-
-function showUsers() {
-  console.log('SU', resp)
-  const usersWindow = document.querySelector('.users-window')
-  const usersList = document.createElement('ol')
-  usersWindow.append(usersList)
-  usersWindow.classList.remove('non-display')
-  console.log('respArr', resp)
   
-for (let i = 0; i < resp.length; i++) {
-  const listItem = document.createElement('li')
-  usersList.append(listItem)
-  listItem.textContent = resp[i].name
-}
-setIsDisabled(true)
-}
 
-
-
-return (
-  <div className='main'>
-  <div className='button-block'>
-    <h1 className='title'>Информация о пользователях</h1>
-    <div className='btn-container'>
-      <button className='btn btn-user-names' onClick={getUsers}>Запросить пользователей у сервера</button>
-      <button className='btn btn-user-show-noneActive' id='users-show-btn' onClick={showUsers} disabled = {isDisabled}>Показать пользователей</button>
+  return (
+    <div className="main">
+      <Block />
+      <div className="server-request-field">
+        <h1 className="title">Еще запросы</h1>
+        <button className="btn-send-request" onClick={testRequest}>Send request</button>
+        <button className="btn-show-response" onClick={showComments}>Show comments</button>
+        <ol className="comments-list"></ol>
+      </div>
     </div>
-  </div>
-    <div className='users-window non-display'>
-
-    </div>
-    </div>
-)
- 
+  );
 }
 
-export default App
+export default App;

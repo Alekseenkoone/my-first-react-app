@@ -1,11 +1,46 @@
-.button-block {
+.main {
+  display: flex;
+  min-height: 100vh;
+}
+
+.info-block {
   background-color: rgb(255, 234, 0);
   width: 200px;
-  height: 150px;
+  height: fit-content;
+  min-height: 150px;
   border: 2px solid grey;
   border-radius: 5px;
   text-align: center;
   margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.server-request-field {
+  display: grid;
+  justify-content: center;
+  background-color: rgb(255, 234, 0);
+  width: 200px;
+  height: fit-content;
+  min-height: 150px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+
+.btn-send-request {
+  width: 100px;
+  height: 35px;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+.btn-show-response {
+  width: 100px;
+  height: 35px;
+  font-size: 1.1em;
+  margin-bottom: 5px;
 }
 
 .title {
@@ -32,19 +67,8 @@
   background-color: rgb(36, 36, 36);
 }
 
-.non-display {
-display: none;
-}
 
-.users-window {
 
-height: auto;
-width: 200px;
-background-color: rgb(255, 234, 0);
-
-border: 2px solid grey;
-border-radius: 5px;
-}
 
 .btn-container {
   display:grid;
